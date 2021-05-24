@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Let's Solve The Quiz</title>
+</head>
+<body>
+    <header class="showcase-quiz">
+        
+    </header>
+    <section class="quiz">
+        <div class="quiz-aside-container">
+        
+            <div class="quiz-aside-home">
+                <a href="../html/index.html"><i class="fas fa-home">&nbsp;HOME</i></a>
+            </div>
+            <div class="quiz-aside-category">
+                <p class="quiz-category-name">Category</p>
+            </div>
+        </div>
+        <div class="quiz-container">
+            <div class="quiz-question-num">
+                <p>Question 01</p>
+            </div>
+            <div class="quiz-question-container">
+                <!-- 퀴즈 문제 표시 -->
+                <p>What is the Question?</p>
+            </div>
+            <div class="quiz-option-container">
+                <div class="quiz-alert-container">
+                    <!-- 선택지를 선택하지 않은 경우  -->
+                    <p>You Should Choose At least ONE ANSWER</p>
+                    <div class="quiz-alert-button-container">
+                        <button class="">Continue</button>
+                    </div>
+                </div>
+
+                <!-- 선택지 -->
+                <span class="select">
+                    <input type="radio" class="radio" id="option-A" name="option" value="option-A">
+                    <label for="option-A" class="option" id="option-A-label">A</label>
+                </span>
+                <span class="select">
+                    <input type="radio" class="radio" id="option-B" name="option" value="option-B">
+                    <label for="option-B" class="option" id="option-B-label">B</label>
+                </span>
+                <span class="select">
+                    <input type="radio" class="radio" id="option-C" name="option" value="option-C">
+                    <label for="option-C" class="option" id="option-C-label">C</label>
+                </span>
+                <span class="select">
+                    <input type="radio" class="radio" id="option-D" name="option" value="option-D">
+                    <label for="option-D" class="option" id="option-D-label">D</label>
+                </span>
+            </div>
+
+            <!-- 이전/다음 버튼 -->
+            <div class="quiz-btn-move">
+                <button>Previous</button>
+                <button>Next</button>
+            </div>
+        </div>
+
+        <div class="quiz-progress-container">
+            <p>progress</p>
+        </div>
+    </section>
+</body>
+</html>
