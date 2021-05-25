@@ -1,3 +1,10 @@
+/*
+    previous buttom관련 참고
+    https://stackoverflow.com/questions/22206222/dynamic-quiz-using-javascript-add-a-back-button
+    https://codepen.io/SitePoint/pen/GmPjjL
+*/
+
+
 //문제
 let allQuestions = [
     {
@@ -84,7 +91,9 @@ let userScore = 0;
 let wrongAnswer = 0;
 let questionIndex = 0;
 
+/* 화면에 문제와 선택지를 보여준다.*/
 function showQuestion(idx) {
+    selectQuestion();
     const currentQuestion = shuffleQuestion[idx];
 
     if (questionNum <= 9) {
@@ -100,6 +109,7 @@ function showQuestion(idx) {
     document.getElementById("option-D-answer").innerHTML = currentQuestion.choices[3];
 }
 
+/* 사용자가 선택한 값이 정답과 일치한지 확인한다. */
 function checkAnswer() {
     const currentQuestion = shuffleQuestion[questionIndex];
     const currentAnwser = currentQuestion.correctAnswer;
@@ -107,6 +117,7 @@ function checkAnswer() {
 
     for (let i = 0; i < 4; i++) {
         if (selectOption[i].checked) {
+            collectUserAnswer(i);
             if (i == currentAnwser) {
                 userScore++;
                 questionNum++;
@@ -120,25 +131,39 @@ function checkAnswer() {
             }
         }
     }
+    // 선택지를 선택하지 않고, next 버튼을 선택하면 경고창을 띄운다.
     if (selectOption[0].checked == false && selectOption[1].checked == false
         && selectOption[2].checked == false && selectOption[3].checked == false) {
         document.querySelector(".quiz-alert-container").style.display = "flex";
+        setTimeout(closeChooseOptionAlarm, 700);
     }
 }
 
+let collectAnswer = [];
+function collectUserAnswer(userAnswer) {
+    collectAnswer.push({ "questionNum": questionNum, "questionIndex": questionIndex, "userAnswer": userAnswer });
+    console.log(shuffleQuestion[collectAnswer[questionNum - 1].questionIndex].question);
+}
+
+/* 이전/다음 버튼의 동작을 설정한다. */
 function controllMoveBtn() {
     checkAnswer();
     resetCheckBtn();
-    if (questionIndex <= 3) {
+
+    if (questionIndex >= 1 && event.target.id === "btn-previous") {
+        // questionNum--;
+        // showPreviousQuestion();
+        // showQuestion(collectAnswer[questionNum - 1].questionNum, true);
+        // console.log(shuffleQuestion[collectAnswer[questionNum - 1].questionNum] + ", " + collectAnswer[questionNum - 1].userAnswer);
+    }
+    else if (questionIndex <= 9 && event.target.id === "btn-next") {
         showQuestion(questionIndex);
     } else {
         controllResult();
     }
-    if (questionNum > 1) {
-        previousBtn.style.display = "flex";
-    }
 }
 
+/* 다음 문제로 넘어갈때 체크한 radio 버튼을 초기화한다. */
 function resetCheckBtn() {
     const selectOption = document.getElementsByName("option");
     for (let i = 0; i < selectOption.length; i++) {
@@ -148,11 +173,18 @@ function resetCheckBtn() {
     }
 }
 
+/* 결과창에 대한 설정 */
 function controllResult() {
     document.getElementById("quiz-wrong-answer").innerHTML = wrongAnswer;
     document.getElementById("quiz-correct-answer").innerHTML = userScore;
     document.getElementById("result-container").style.display = "flex";
 }
+
+/* 옵션 미선택 시, 보여지는 창을 없앤다. */
+function closeChooseOptionAlarm() {
+    document.querySelector(".quiz-alert-container").style.display = "none";
+}
+
 
 let previousBtn = document.getElementById("btn-previous");
 previousBtn.addEventListener("click", controllMoveBtn);
@@ -160,5 +192,4 @@ previousBtn.addEventListener("click", controllMoveBtn);
 let nextBtn = document.getElementById("btn-next");
 nextBtn.addEventListener("click", controllMoveBtn);
 
-window.addEventListener("load", selectQuestion());
 window.addEventListener("load", showQuestion(0));
