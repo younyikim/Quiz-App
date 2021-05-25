@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,31 +12,45 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>Let's Solve The Quiz</title>
 </head>
+
 <body>
     <header class="showcase-quiz">
-        
+
     </header>
     <section class="quiz">
+        <div class="quiz-result-container" id="result-container">
+            <div class="quiz-result-content">
+                <h1>Quiz complete</h1>
+                <div class="quiz-result-display">
+                    <p>Wrong answer : <span id="quiz-wrong-answer"></span></p>
+                    <p>Correct answer : <span id="quiz-correct-answer"></span></p>
+                </div>
+            </div>
+        </div>
+        <!-- 퀴즈 화면 왼쪽 (홈버튼 & 카테고리) -->
         <div class="quiz-aside-container">
-        
+
             <div class="quiz-aside-home">
                 <a href="../html/index.html"><i class="fas fa-home">&nbsp;HOME</i></a>
             </div>
             <div class="quiz-aside-category">
-                <p class="quiz-category-name">Category</p>
+                <p class="quiz-category-name">Korea</p>
             </div>
         </div>
         <div class="quiz-container">
+            <!-- 퀴즈 문제 번호 표시 -->
             <div class="quiz-question-num">
-                <p>Question 01</p>
+                <p id="quiz-display-num">Question 01</p>
             </div>
+
+            <!-- 퀴즈 문제 표시 -->
             <div class="quiz-question-container">
-                <!-- 퀴즈 문제 표시 -->
-                <p>What is the Question?</p>
+                <p id="quiz-display-question">What is the Question?</p>
             </div>
+
             <div class="quiz-option-container">
+                <!-- 선택지를 선택하지 않은 경우  -->
                 <div class="quiz-alert-container">
-                    <!-- 선택지를 선택하지 않은 경우  -->
                     <p>You Should Choose At least ONE ANSWER</p>
                     <div class="quiz-alert-button-container">
                         <button class="">Continue</button>
@@ -45,26 +60,38 @@
                 <!-- 선택지 -->
                 <span class="select">
                     <input type="radio" class="radio" id="option-A" name="option" value="option-A">
-                    <label for="option-A" class="option" id="option-A-label">A</label>
+                    <label for="option-A" class="option" id="option-A-label">
+                        <span class="alphabet">A</span>
+                        <p class="answer" id="option-A-answer">Seoul</p>
+                    </label>
                 </span>
                 <span class="select">
                     <input type="radio" class="radio" id="option-B" name="option" value="option-B">
-                    <label for="option-B" class="option" id="option-B-label">B</label>
+                    <label for="option-B" class="option" id="option-B-label">
+                        <span class="alphabet">B</span>
+                        <p class="answer" id="option-B-answer">Seoul</p>
+                    </label>
                 </span>
                 <span class="select">
                     <input type="radio" class="radio" id="option-C" name="option" value="option-C">
-                    <label for="option-C" class="option" id="option-C-label">C</label>
+                    <label for="option-C" class="option" id="option-C-label">
+                        <span class="alphabet">C</span>
+                        <p class="answer" id="option-C-answer">Seoul</p>
+                    </label>
                 </span>
                 <span class="select">
                     <input type="radio" class="radio" id="option-D" name="option" value="option-D">
-                    <label for="option-D" class="option" id="option-D-label">D</label>
+                    <label for="option-D" class="option" id="option-D-label">
+                        <span class="alphabet">D</span>
+                        <p class="answer" id="option-D-answer">Seoul</p>
+                    </label>
                 </span>
             </div>
 
             <!-- 이전/다음 버튼 -->
             <div class="quiz-btn-move">
-                <button>Previous</button>
-                <button>Next</button>
+                <button id="btn-previous">Previous</button>
+                <button id="btn-next">Next</button>
             </div>
         </div>
 
@@ -72,5 +99,7 @@
             <p>progress</p>
         </div>
     </section>
+    <script src="../js/script.js"></script>
 </body>
+
 </html>
