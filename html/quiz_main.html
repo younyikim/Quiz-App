@@ -24,8 +24,12 @@
                 <h1>Quiz complete</h1>
                 <div class="quiz-result-display">
                     <p>Wrong answer : <span id="quiz-wrong-answer"></span></p>
-                    <p>Correct answer : <span id="quiz-correct-answer"></span></p>
+                    <p>Score : <span id="quiz-correct-answer"></span></p>
                 </div>
+            </div>
+            <div class="quiz-retry">
+                <a href="../html/index.html" id="quiz-retry-button" class="btn btn-rounded"><i class="fas fa-redo"></i>
+                    Retry </a>
             </div>
         </div>
         <!-- 퀴즈 화면 왼쪽 (홈버튼 & 카테고리) -->
@@ -88,14 +92,18 @@
 
             <!-- 이전/다음 버튼 -->
             <div class="quiz-btn-move">
-                <button id="btn-previous">Previous</button>
+                <!-- <button id="btn-previous">Previous</button> -->
                 <button id="btn-next">Next</button>
             </div>
         </div>
 
-        <div class="quiz-progress-container">
-            <p>progress</p>
-        </div>
+        <!-- Progress Bar -->
+        <div class="quiz-progress">
+            <div id="quiz-progress-container">
+                <div id="quiz-progress-bar">
+                </div>
+            </div>
+            <p id="questionCnt"></p>
     </section>
     <script src="../js/script.js"></script>
 </body>

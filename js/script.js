@@ -94,6 +94,7 @@ let questionIndex = 0;
 /* 화면에 문제와 선택지를 보여준다.*/
 function showQuestion(idx) {
     selectQuestion();
+    progressMove();
     const currentQuestion = shuffleQuestion[idx];
 
     if (questionNum <= 9) {
@@ -149,14 +150,9 @@ function collectUserAnswer(userAnswer) {
 function controllMoveBtn() {
     checkAnswer();
     resetCheckBtn();
+    // progressMove();
 
-    if (questionIndex >= 1 && event.target.id === "btn-previous") {
-        // questionNum--;
-        // showPreviousQuestion();
-        // showQuestion(collectAnswer[questionNum - 1].questionNum, true);
-        // console.log(shuffleQuestion[collectAnswer[questionNum - 1].questionNum] + ", " + collectAnswer[questionNum - 1].userAnswer);
-    }
-    else if (questionIndex <= 9 && event.target.id === "btn-next") {
+    if (questionIndex <= 9 && event.target.id === "btn-next") {
         showQuestion(questionIndex);
     } else {
         controllResult();
@@ -185,9 +181,22 @@ function closeChooseOptionAlarm() {
     document.querySelector(".quiz-alert-container").style.display = "none";
 }
 
+/* 진행 상황을 보여주는 progress bar */
+function progressMove() {
+    if (questionNum <= 10) {
+        let elem = document.getElementById("quiz-progress-bar");
+        let questionCnt = document.getElementById("questionCnt");
+        let width = questionNum;
 
-let previousBtn = document.getElementById("btn-previous");
-previousBtn.addEventListener("click", controllMoveBtn);
+        width *= 10;
+        elem.style.width = width + "%";
+        questionCnt.innerHTML = questionNum + " / 10";
+    }
+}
+
+
+// let previousBtn = document.getElementById("btn-previous");
+// previousBtn.addEventListener("click", controllMoveBtn);
 
 let nextBtn = document.getElementById("btn-next");
 nextBtn.addEventListener("click", controllMoveBtn);
