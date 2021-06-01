@@ -1,10 +1,3 @@
-/*
-    previous buttom관련 참고
-    https://stackoverflow.com/questions/22206222/dynamic-quiz-using-javascript-add-a-back-button
-    https://codepen.io/SitePoint/pen/GmPjjL
-*/
-
-
 //문제
 let allQuestions = [
     {
@@ -65,18 +58,23 @@ let allQuestions = [
         correctAnswer: 2
     }
 ];
-/*
-    quiz reference
-    https://culturalmixology.com/south-korea-quiz/
-    https://www.diariesofmagazine.com/quiz-about-south-korea/
-    https://www.proprofs.com/quiz-school/story.php?title=3dq-how-much-do-you-know-about-south-korea
-*/
 
 
-// 사용자에게 보여지는 문제를 순서대로 저장하는 배열
-let shuffleQuestion = [];
+let shuffleQuestion = []; // 사용자에게 보여지는 문제를 순서대로 저장하는 배열
+let collectAnswer = [];   // 사용자가 선택한 답을 저장하는 배열
 
-/* 문제를 random하게 선택한다. */
+let questionNum = 1;      // 사용자가 푼 문제 수
+let userScore = 0;
+let wrongAnswer = 0;
+let questionIndex = 0;   // allQuestions에 저장된 문제의 index
+
+let nextBtn = document.getElementById("btn-next");
+nextBtn.addEventListener("click", controllMoveBtn);
+
+window.addEventListener("load", showQuestion(0));
+
+
+/* 문제를 random하게 선택 */
 function selectQuestion() {
     while (shuffleQuestion.length < 10) {
         const randomIndex = allQuestions[Math.floor(Math.random() * allQuestions.length)];
@@ -86,10 +84,6 @@ function selectQuestion() {
     }
 }
 
-let questionNum = 1;
-let userScore = 0;
-let wrongAnswer = 0;
-let questionIndex = 0;
 
 /* 화면에 문제와 선택지를 보여준다.*/
 function showQuestion(idx) {
@@ -110,6 +104,7 @@ function showQuestion(idx) {
     document.getElementById("option-D-answer").innerHTML = currentQuestion.choices[3];
 }
 
+
 /* 사용자가 선택한 값이 정답과 일치한지 확인한다. */
 function checkAnswer() {
     const currentQuestion = shuffleQuestion[questionIndex];
@@ -123,11 +118,13 @@ function checkAnswer() {
                 userScore++;
                 questionNum++;
                 questionIndex++;
+                /* Test Console */
                 console.log("Correct! score : " + userScore + ", num : " + questionNum);
             } else {
                 wrongAnswer++;
                 questionNum++;
                 questionIndex++;
+                /* Test Console */
                 console.log("Wrong! score : " + userScore + ", num : " + questionNum);
             }
         }
@@ -135,22 +132,25 @@ function checkAnswer() {
     // 선택지를 선택하지 않고, next 버튼을 선택하면 경고창을 띄운다.
     if (selectOption[0].checked == false && selectOption[1].checked == false
         && selectOption[2].checked == false && selectOption[3].checked == false) {
+
         document.querySelector(".quiz-alert-container").style.display = "flex";
         setTimeout(closeChooseOptionAlarm, 700);
     }
 }
 
-let collectAnswer = [];
+
+/* 사용자가 선택한 답을 저장 */
 function collectUserAnswer(userAnswer) {
     collectAnswer.push({ "questionNum": questionNum, "questionIndex": questionIndex, "userAnswer": userAnswer });
+    /* Test Console */
     console.log(shuffleQuestion[collectAnswer[questionNum - 1].questionIndex].question);
 }
+
 
 /* 이전/다음 버튼의 동작을 설정한다. */
 function controllMoveBtn() {
     checkAnswer();
     resetCheckBtn();
-    // progressMove();
 
     if (questionIndex <= 9 && event.target.id === "btn-next") {
         showQuestion(questionIndex);
@@ -158,6 +158,7 @@ function controllMoveBtn() {
         controllResult();
     }
 }
+
 
 /* 다음 문제로 넘어갈때 체크한 radio 버튼을 초기화한다. */
 function resetCheckBtn() {
@@ -169,6 +170,7 @@ function resetCheckBtn() {
     }
 }
 
+
 /* 결과창에 대한 설정 */
 function controllResult() {
     document.getElementById("quiz-wrong-answer").innerHTML = wrongAnswer;
@@ -176,10 +178,12 @@ function controllResult() {
     document.getElementById("result-container").style.display = "flex";
 }
 
+
 /* 옵션 미선택 시, 보여지는 창을 없앤다. */
 function closeChooseOptionAlarm() {
     document.querySelector(".quiz-alert-container").style.display = "none";
 }
+
 
 /* 진행 상황을 보여주는 progress bar */
 function progressMove() {
@@ -189,16 +193,8 @@ function progressMove() {
         let width = questionNum;
 
         width *= 10;
-        elem.style.width = width + "%";
+        elem.style.width = `${width}%`;
         questionCnt.innerHTML = questionNum + " / 10";
     }
 }
 
-
-// let previousBtn = document.getElementById("btn-previous");
-// previousBtn.addEventListener("click", controllMoveBtn);
-
-let nextBtn = document.getElementById("btn-next");
-nextBtn.addEventListener("click", controllMoveBtn);
-
-window.addEventListener("load", showQuestion(0));
