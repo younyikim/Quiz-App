@@ -14,7 +14,7 @@ let allQuestions = [
     {
         question: "What is a jimjilbang?",
         choices: ["A one-room mixed hostel", "A bath house", "A purification ceremony", "A Cafe"],
-        correctAnswer: 2
+        correctAnswer: 1
     },
 
     {
@@ -69,10 +69,12 @@ let wrongAnswer = 0;
 let questionIndex = 0;   // allQuestions에 저장된 문제의 index
 
 let nextBtn = document.getElementById("btn-next");
-nextBtn.addEventListener("click", controllMoveBtn);
+nextBtn.addEventListener("click", controllNextBtn);
+
+let prevBtn = document.getElementById("btn-previous");
+prevBtn.addEventListener("click", controllPrevBtn);
 
 window.addEventListener("load", showQuestion(0));
-
 
 /* 문제를 random하게 선택 */
 function selectQuestion() {
@@ -98,12 +100,42 @@ function showQuestion(idx) {
     }
 
     document.getElementById("quiz-display-question").innerHTML = currentQuestion.question;
-    document.getElementById("option-A-answer").innerHTML = currentQuestion.choices[0];
-    document.getElementById("option-B-answer").innerHTML = currentQuestion.choices[1];
-    document.getElementById("option-C-answer").innerHTML = currentQuestion.choices[2];
-    document.getElementById("option-D-answer").innerHTML = currentQuestion.choices[3];
+    document.getElementById("option-1-answer").innerHTML = currentQuestion.choices[0];
+    document.getElementById("option-2-answer").innerHTML = currentQuestion.choices[1];
+    document.getElementById("option-3-answer").innerHTML = currentQuestion.choices[2];
+    document.getElementById("option-4-answer").innerHTML = currentQuestion.choices[3];
+
+    /* 아래 코드를 추가하면, 문제를 2개 이상 앞으로 갔다가 다음으로 넘어갈 경우, 이전에 선택했던
+        선택을 보여줄 수 있음. 하지만  
+        script.js:129 Uncaught TypeError: Cannot read property 'currentAnwser' of undefined
+        발생함. 써도 괜찮은가 하는 것은 좀 더 확인해 봐야한다. */
+    if (collectAnswer[idx].currentAnwser != undefined) {
+        document.getElementsByName("option")[collectAnswer[idx].currentAnwser].checked = true;
+    }
+
 }
 
+
+/* 이전 문제와 선택했던 답안을 보여준다. */
+function showPrevQuestion(idx) {
+    progressMove();
+    const prevQuestion = shuffleQuestion[idx];
+    const prevUserAnswer = collectAnswer[idx].currentAnwser;
+
+    if (questionNum <= 9) {
+        document.getElementById("quiz-display-num").innerHTML = "Question" + "0" + questionNum;
+    } else {
+        document.getElementById("quiz-display-num").innerHTML = "Question " + questionNum;
+    }
+
+    document.getElementById("quiz-display-question").innerHTML = prevQuestion.question;
+    document.getElementById("option-1-answer").innerHTML = prevQuestion.choices[0];
+    document.getElementById("option-2-answer").innerHTML = prevQuestion.choices[1];
+    document.getElementById("option-3-answer").innerHTML = prevQuestion.choices[2];
+    document.getElementById("option-4-answer").innerHTML = prevQuestion.choices[3];
+
+    document.getElementsByName("option")[prevUserAnswer].checked = true;
+}
 
 /* 사용자가 선택한 값이 정답과 일치한지 확인한다. */
 function checkAnswer() {
@@ -113,42 +145,86 @@ function checkAnswer() {
 
     for (let i = 0; i < 4; i++) {
         if (selectOption[i].checked) {
-            collectUserAnswer(i);
-            if (i == currentAnwser) {
-                userScore++;
-                questionNum++;
-                questionIndex++;
+            if (collectAnswer[questionIndex] === undefined) {
+                if (i === currentAnwser) {
+                    userScore++;
+                    questionNum++;
+                    questionIndex++;
+                    /* Test Console */
+                    console.log("Correct! score : " + userScore + ", num : " + questionNum);
+                } else {
+                    wrongAnswer++;
+                    questionNum++;
+                    questionIndex++;
+                    /* Test Console */
+                    console.log("Wrong! score : " + userScore + ", num : " + questionNum);
+                }
+
+                collectAnswer.push({
+                    currentAnwser: i,
+                    userScore: userScore,
+                    wrongAnswer: wrongAnswer
+                });
+
                 /* Test Console */
-                console.log("Correct! score : " + userScore + ", num : " + questionNum);
-            } else {
-                wrongAnswer++;
-                questionNum++;
-                questionIndex++;
-                /* Test Console */
-                console.log("Wrong! score : " + userScore + ", num : " + questionNum);
+                console.log(collectAnswer[questionIndex - 1]);
+                console.log("questionIndex : " + questionIndex + ", questionNum : " + questionNum);
+
             }
+            /* 이전 문제로 돌아가 다시 문제를 푼 경우, 답을 확인한다.*/
+            else {
+                let prevOriginAns = collectAnswer[questionIndex].currentAnwser;
+
+                /* 앞의 문제로 되돌아 가는 경우, 
+                collectAnswer[questionIndex]의 점수와 오답 수를, 현재 점수와 오답으로 업데이트 */
+                collectAnswer[questionIndex].currentAnwser = i;
+                collectAnswer[questionIndex].userScore = userScore;
+                collectAnswer[questionIndex].wrongAnswer = wrongAnswer;
+
+                /* 수정한 답이 오답인 경우 */
+                if (collectAnswer[questionIndex].currentAnwser != currentAnwser) {
+                    if (collectAnswer[questionIndex].userScore > 0) {
+                        collectAnswer[questionIndex].userScore -= 1;
+                        userScore = collectAnswer[questionIndex].userScore;
+                    }
+                    collectAnswer[questionIndex].wrongAnswer += 1;
+                    wrongAnswer = collectAnswer[questionIndex].wrongAnswer;
+                }
+                /* 수정한 답이 정답인 경우 */
+                else {
+                    /* 원래 선택했던 답이 정답이었던 경우에는 점수를 조정하지 않고,
+                        수정한 답이 정답이 되는 경우에만 점수와 틀린 문제 수를 조정한다. */
+                    if (prevOriginAns != i) {
+                        collectAnswer[questionIndex].userScore += 1;
+                        userScore = collectAnswer[questionIndex].userScore;
+                        collectAnswer[questionIndex].wrongAnswer -= 1;
+                        wrongAnswer = collectAnswer[questionIndex].wrongAnswer;
+                    }
+                }
+
+                /* Test Console */
+                console.log(collectAnswer[questionIndex]);
+                console.log("origin Ans :" + prevOriginAns + ", questionIndex : " + questionIndex + ", questionNum : " + questionNum);
+
+                questionNum++;
+                questionIndex++;
+            }
+
         }
     }
-    // 선택지를 선택하지 않고, next 버튼을 선택하면 경고창을 띄운다.
+
+    // 입력 유효성 검사 
+    // 선택지를 선택하지 않고, next 버튼을 선택하면 경고창을 띄운다. 
     if (selectOption[0].checked == false && selectOption[1].checked == false
         && selectOption[2].checked == false && selectOption[3].checked == false) {
 
         document.querySelector(".quiz-alert-container").style.display = "flex";
-        setTimeout(closeChooseOptionAlarm, 700);
+        setTimeout(closeChooseOptionAlarm, 800);
     }
 }
 
-
-/* 사용자가 선택한 답을 저장 */
-function collectUserAnswer(userAnswer) {
-    collectAnswer.push({ "questionNum": questionNum, "questionIndex": questionIndex, "userAnswer": userAnswer });
-    /* Test Console */
-    console.log(shuffleQuestion[collectAnswer[questionNum - 1].questionIndex].question);
-}
-
-
-/* 이전/다음 버튼의 동작을 설정한다. */
-function controllMoveBtn() {
+/* 다음 버튼의 동작을 설정한다. */
+function controllNextBtn() {
     checkAnswer();
     resetCheckBtn();
 
@@ -159,6 +235,13 @@ function controllMoveBtn() {
     }
 }
 
+/* 이전 버튼의 동작을 설정한다. */
+function controllPrevBtn() {
+    if (questionIndex >= 1 && event.target.id === "btn-previous") {
+        --questionNum;
+        showPrevQuestion(--questionIndex);
+    }
+}
 
 /* 다음 문제로 넘어갈때 체크한 radio 버튼을 초기화한다. */
 function resetCheckBtn() {
