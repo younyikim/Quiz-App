@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https: //code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <title>Let's Solve The Quiz</title>
 </head>
 
@@ -46,12 +46,14 @@
         <div class="quiz-container">
             <!-- 퀴즈 문제 번호 표시 -->
             <div class="quiz-question-num">
-                <p id="quiz-display-num">Question 01</p>
+                <p id="quiz-display-num"></p>
+                <!-- <p id="quiz-display-num">Question 01</p> -->
             </div>
 
             <!-- 퀴즈 문제 표시 -->
             <div class="quiz-question-container">
-                <p id="quiz-display-question">What is the Question?</p>
+                <p id="quiz-display-question"></p>
+                <!-- <p id="quiz-display-question">What is the Question?</p> -->
             </div>
 
             <div class="quiz-option-container" id="quiz-option-required">
@@ -65,28 +67,28 @@
                     <input type="radio" class="radio" id="option-A" name="option" value="option-A">
                     <label for="option-A" class="option" id="option-A-label">
                         <span class="alphabet">A</span>
-                        <p class="answer" id="option-1-answer">Seoul</p>
+                        <p class="answer" id="option-1-answer"></p>
                     </label>
                 </span>
                 <span class="select">
                     <input type="radio" class="radio" id="option-B" name="option" value="option-B">
                     <label for="option-B" class="option" id="option-B-label">
                         <span class="alphabet">B</span>
-                        <p class="answer" id="option-2-answer">Seoul</p>
+                        <p class="answer" id="option-2-answer"></p>
                     </label>
                 </span>
                 <span class="select">
                     <input type="radio" class="radio" id="option-C" name="option" value="option-C">
                     <label for="option-C" class="option" id="option-C-label">
                         <span class="alphabet">C</span>
-                        <p class="answer" id="option-3-answer">Seoul</p>
+                        <p class="answer" id="option-3-answer"></p>
                     </label>
                 </span>
                 <span class="select">
                     <input type="radio" class="radio" id="option-D" name="option" value="option-D">
                     <label for="option-D" class="option" id="option-D-label">
                         <span class="alphabet">D</span>
-                        <p class="answer" id="option-4-answer">Seoul</p>
+                        <p class="answer" id="option-4-answer"></p>
                     </label>
                 </span>
             </div>
@@ -105,6 +107,7 @@
                 </div>
             </div>
             <p id="questionCnt"></p>
+        </div>
     </section>
     <script src="../js/script.js"></script>
 </body>

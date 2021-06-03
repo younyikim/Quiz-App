@@ -11,12 +11,12 @@ body {
   
 }
 
-
 h1, h2, h3, h4 {
     color : #000;
 }
 
 .showcase {
+    border: 1px solid #fff;
     width: 100%;
     height : 90vh;
     position: relative;
@@ -343,8 +343,8 @@ input[type="radio"]:checked ~ .option {
 /* footer */
 .footer {
     max-width: 80%;
-    height: 10vh;
-    margin: 1rem auto;
+    height: 15vh;
+    margin:  1rem auto;
     overflow: auto;
     text-align: center;
 }

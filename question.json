@@ -1,0 +1,102 @@
+[
+    {
+        "question": "What is the capital of South Korea?",
+        "choices": [
+            "Pyongyang",
+            "Seoul",
+            "Busan",
+            "Jeju"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "question": "What is the South Korean typical attire called?",
+        "choices": [
+            "Hanbok",
+            "Yukata",
+            "Kimono",
+            "Suit"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "question": "What is a jimjilbang?",
+        "choices": [
+            "A one-room mixed hostel",
+            "A bath house",
+            "A purification ceremony",
+            "A Cafe"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "question": "What are the Boseong tea plantations known for?",
+        "choices": [
+            "Black Tea",
+            "White Tea",
+            "Grenn tea",
+            "Coffee"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "question": "What is a hanok?",
+        "choices": [
+            "A private neighbourhood",
+            "A palace",
+            "A temple",
+            "A traditional wooden house"
+        ],
+        "correctAnswer": 3
+    },
+    {
+        "question": "What is the traditional sport in Korea?",
+        "choices": [
+            "Taekwondo",
+            "Tennis",
+            "Baseball",
+            "Karate"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "question": "Which Korean city hosted the Asian Games in 2002?",
+        "choices": [
+            "Seoul",
+            "Seogwipo",
+            "Busan",
+            "Ulsan"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "question": "What is the Korean word for the South Korean national flag?",
+        "choices": [
+            "Chunggukki",
+            "Taegukki",
+            "Minjuki",
+            "Keungukki"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "question": "What is the population of South Korea?",
+        "choices": [
+            "48 million",
+            "51 million",
+            "57 million",
+            "45million"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "question": "South Korea has some popular spots for hikers. Which South Korean mountain is the highest?",
+        "choices": [
+            "Chiri-san",
+            "Bukhansan",
+            "Hallasan",
+            "Seoraksan"
+        ],
+        "correctAnswer": 2
+    }
+]

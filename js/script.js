@@ -1,3 +1,8 @@
+var script = document.createElement('script');
+script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+script.type = 'text/javascript';
+document.getElementsByTagName('head')[0].appendChild(script);
+
 //문제
 let allQuestions = [
     {
@@ -59,7 +64,6 @@ let allQuestions = [
     }
 ];
 
-
 let shuffleQuestion = []; // 사용자에게 보여지는 문제를 순서대로 저장하는 배열
 let collectAnswer = [];   // 사용자가 선택한 답을 저장하는 배열
 
@@ -67,6 +71,8 @@ let questionNum = 1;      // 사용자가 푼 문제 수
 let userScore = 0;
 let wrongAnswer = 0;
 let questionIndex = 0;   // allQuestions에 저장된 문제의 index
+
+let test = 0;
 
 let nextBtn = document.getElementById("btn-next");
 nextBtn.addEventListener("click", controllNextBtn);
@@ -79,10 +85,25 @@ window.addEventListener("load", showQuestion(0));
 /* 문제를 random하게 선택 */
 function selectQuestion() {
     while (shuffleQuestion.length < 10) {
-        const randomIndex = allQuestions[Math.floor(Math.random() * allQuestions.length)];
-        if (!shuffleQuestion.includes(randomIndex)) {
-            shuffleQuestion.push(randomIndex);
+        const randomIndex = allQuestions[Math.floor(Math.random() * Object.keys(allQuestions).length)];
+
+        // IE - Pollyfill for includes()
+        if (!Array.prototype.includes) {
+            Object.defineProperty(Array.prototype, "includes", {
+                enumerable: false,
+                value: function (obj) {
+                    var newArr = this.filter(function (el) {
+                        return el == obj;
+                    });
+                    return newArr.length > 0;
+                }
+            });
+        } else {
+            if (!shuffleQuestion.includes(randomIndex)) {
+                shuffleQuestion.push(randomIndex);
+            }
         }
+
     }
 }
 
@@ -90,31 +111,30 @@ function selectQuestion() {
 /* 화면에 문제와 선택지를 보여준다.*/
 function showQuestion(idx) {
     selectQuestion();
-    progressMove();
+
     const currentQuestion = shuffleQuestion[idx];
 
-    if (questionNum <= 9) {
-        document.getElementById("quiz-display-num").innerHTML = "Question" + "0" + questionNum;
-    } else {
-        document.getElementById("quiz-display-num").innerHTML = "Question " + questionNum;
+    if (questionNum == 1) {
+        $(".quiz-container").hide();
     }
+    $(".quiz-container")
+        .fadeOut(function () {
+            progressMove();
+            if (questionNum <= 9) {
+                $("#quiz-display-num").text("Question 0" + questionNum);
+            } else {
+                $("#quiz-display-num").html("Question " + questionNum);
+            }
 
-    document.getElementById("quiz-display-question").innerHTML = currentQuestion.question;
-    document.getElementById("option-1-answer").innerHTML = currentQuestion.choices[0];
-    document.getElementById("option-2-answer").innerHTML = currentQuestion.choices[1];
-    document.getElementById("option-3-answer").innerHTML = currentQuestion.choices[2];
-    document.getElementById("option-4-answer").innerHTML = currentQuestion.choices[3];
+            $("#quiz-display-question").html(currentQuestion.question);
+            $("#option-1-answer").html(currentQuestion.choices[0]);
+            $("#option-2-answer").html(currentQuestion.choices[1]);
+            $("#option-3-answer").html(currentQuestion.choices[2]);
+            $("#option-4-answer").html(currentQuestion.choices[3]);
 
-    /* 아래 코드를 추가하면, 문제를 2개 이상 앞으로 갔다가 다음으로 넘어갈 경우, 이전에 선택했던
-        선택을 보여줄 수 있음. 하지만  
-        script.js:129 Uncaught TypeError: Cannot read property 'currentAnwser' of undefined
-        발생함. 써도 괜찮은가 하는 것은 좀 더 확인해 봐야한다. */
-    if (collectAnswer[idx].currentAnwser != undefined) {
-        document.getElementsByName("option")[collectAnswer[idx].currentAnwser].checked = true;
-    }
-
+            $(".quiz-container").fadeIn('fast');
+        })
 }
-
 
 /* 이전 문제와 선택했던 답안을 보여준다. */
 function showPrevQuestion(idx) {
@@ -122,19 +142,24 @@ function showPrevQuestion(idx) {
     const prevQuestion = shuffleQuestion[idx];
     const prevUserAnswer = collectAnswer[idx].currentAnwser;
 
-    if (questionNum <= 9) {
-        document.getElementById("quiz-display-num").innerHTML = "Question" + "0" + questionNum;
-    } else {
-        document.getElementById("quiz-display-num").innerHTML = "Question " + questionNum;
-    }
+    $(".quiz-container")
+        .fadeOut(function () {
+            progressMove();
+            if (questionNum <= 9) {
+                $("#quiz-display-num").text("Question 0" + questionNum);
+            } else {
+                $("#quiz-display-num").html("Question " + questionNum);
+            }
 
-    document.getElementById("quiz-display-question").innerHTML = prevQuestion.question;
-    document.getElementById("option-1-answer").innerHTML = prevQuestion.choices[0];
-    document.getElementById("option-2-answer").innerHTML = prevQuestion.choices[1];
-    document.getElementById("option-3-answer").innerHTML = prevQuestion.choices[2];
-    document.getElementById("option-4-answer").innerHTML = prevQuestion.choices[3];
+            $("#quiz-display-question").html(prevQuestion.question);
+            $("#option-1-answer").html(prevQuestion.choices[0]);
+            $("#option-2-answer").html(prevQuestion.choices[1]);
+            $("#option-3-answer").html(prevQuestion.choices[2]);
+            $("#option-4-answer").html(prevQuestion.choices[3]);
 
-    document.getElementsByName("option")[prevUserAnswer].checked = true;
+            $($("input[name='option']").get(prevUserAnswer)).prop('checked', true);
+            $(".quiz-container").fadeIn('fast');
+        })
 }
 
 /* 사용자가 선택한 값이 정답과 일치한지 확인한다. */
@@ -276,8 +301,7 @@ function progressMove() {
         let width = questionNum;
 
         width *= 10;
-        elem.style.width = `${width}%`;
+        elem.style.width = width + "%";
         questionCnt.innerHTML = questionNum + " / 10";
     }
 }
-
