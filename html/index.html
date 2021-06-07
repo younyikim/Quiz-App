@@ -10,8 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https: //code.jquery.com/jquery-1.12.4.min.js"></script>
-    <title>Welcome To Quiz World</title>
+    <<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js">
+        </script>
+        <title>Welcome To Quiz World</title>
 </head>
 
 <body>
@@ -21,11 +22,21 @@
             <p id="title-right">The Quiz</p>
         </div>
         <div class="showcase-pic">
-            <a href="../html/quiz_main.html" class="btn btn-xl btn-rounded">Start</a>
+            <form id="showcase-login-form" class="hidden">
+                <p id="showcase-login-label">Welcome, What's your name?</p>
+                <input autofocus required maxlength="15" type="text" placeholder="Enter your name" />
+                <button id="showcase-login-button" class="btn btn-xl btn-rounded">Log
+                    In</button>
+            </form>
+            <p class="showcase-login-again hidden">
+            <p id="quiz-user-greeting"></p>
+            <a href="../html/quiz_main.html" id="showcase-start-button" class="btn btn-xl btn-rounded">Start</a>
+            </p>
+
         </div>
     </header>
     <footer class="footer">
-        <nav style="text-align: center;">
+        <nav style="text-align:center;">
 
             <ul class="footerul" style="text-align: center; padding: 0px;">
                 <li><a target="_blank" href="https://github.com/younyikim">
@@ -44,7 +55,7 @@
         <div>MadeBy _ younyi Kim</div>
 
     </footer>
-    <script src="../js/script.js"></script>
+    <script src="../js/script_login.js"></script>
 </body>
 
 </html>

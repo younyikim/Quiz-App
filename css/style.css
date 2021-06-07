@@ -22,6 +22,9 @@ h1, h2, h3, h4 {
     position: relative;
 }
 
+.hidden {
+    display: none;
+}
 .showcase-title {
     position: relative;
     /* top | right | bottom | left */
@@ -55,6 +58,8 @@ h1, h2, h3, h4 {
     text-align: center;
     background: url('../img/main_2.jpg')  no-repeat center center/cover;
 }
+  
+
 .showcase-pic::after {
     content: '';
     position: absolute;
@@ -66,7 +71,36 @@ h1, h2, h3, h4 {
     background: rgba(0, 0, 0, 0.1);
     box-shadow: inset 120px 100px 250px rgb(72, 72, 72), inset -120px -100px 250px rgb(71, 71, 71),;
 }
-.showcase-pic a {
+
+
+#showcase-login-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    font-weight: 500;
+    z-index: 3;
+}
+
+#showcase-login-form p {
+    margin-bottom: 2rem;
+}
+
+#showcase-login-form input {
+    width: 50%;
+    height: 4vh;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.76);
+    border-radius: 2px;
+    text-align: center;
+}
+
+#showcase-login-form input::placeholder {
+    color: rgb(207, 207, 207);
+}
+
+#showcase-login-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -74,8 +108,29 @@ h1, h2, h3, h4 {
     -ms-transform: translate(-50%, -50%);
     z-index: 3;
     text-decoration: none; 
+    margin-top: 10rem;
 }
 
+#showcase-login-again {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    z-index: 3;
+}
+
+#quiz-user-greeting {
+    font-size: 4rem;
+    font-weight: 500;
+    margin-bottom: 3rem;
+}
+
+#showcase-start-button {
+    display: none;
+    z-index: 3;
+    text-decoration: none;
+}
 
 /* Quiz Main */
 .quiz{
@@ -362,7 +417,7 @@ input[type="radio"]:checked ~ .option {
     display: inline-block;
     background: #000;
     color: #fff;
-    padding : 0.4rem 1.3rem;
+    padding : 0.2rem 1.0rem;
     font-size: 1rem;
     text-align: center;
     border: none;
@@ -374,7 +429,7 @@ input[type="radio"]:checked ~ .option {
 }
 
 .btn-xl {
-    font-size: 4rem;
+    font-size: 3rem;
     padding: 1.5rem 2.1rem;
     text-transform: uppercase;
 }
@@ -390,17 +445,34 @@ input[type="radio"]:checked ~ .option {
    .btn-xl {
        font-size: 2.5rem;
    }
+
+    #title-left, 
+    #title-right {
+       font-size: 3.5rem;
+   }
+
    .showcase {
         height : 80vh;
     }
+
    .showcase-pic {
         height: 50vh;
     }
+
+    #showcase-login-form {
+        font-size: 2.5rem;
+    }
+
+    #quiz-user-greeting {
+        font-size: 3rem;
+    }
+
    .quiz-aside-container {
         grid-column: 1 / 4;
         grid-row: 1 / 2;
         height: 20vh;
     }
+
     .quiz-container{
         grid-column: 1 / 4;
         grid-row: 1 / 2;
@@ -411,7 +483,6 @@ input[type="radio"]:checked ~ .option {
         grid-row : 3 / 4;
     }
 
-    
     .quiz-aside-container>:nth-child(2){
         margin-top: 2vh;
     }

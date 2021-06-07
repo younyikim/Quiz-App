@@ -24,7 +24,7 @@ let allQuestions = [
 
     {
         question: "What are the Boseong tea plantations known for?",
-        choices: ["Black Tea", "White Tea", "Grenn tea", "Coffee"],
+        choices: ["Black Tea", "White Tea", "Green tea", "Coffee"],
         correctAnswer: 2
     },
 
@@ -73,6 +73,7 @@ let wrongAnswer = 0;
 let questionIndex = 0;   // allQuestions에 저장된 문제의 index
 
 let test = 0;
+window.addEventListener("load", showQuestion(0));
 
 let nextBtn = document.getElementById("btn-next");
 nextBtn.addEventListener("click", controllNextBtn);
@@ -80,7 +81,7 @@ nextBtn.addEventListener("click", controllNextBtn);
 let prevBtn = document.getElementById("btn-previous");
 prevBtn.addEventListener("click", controllPrevBtn);
 
-window.addEventListener("load", showQuestion(0));
+
 
 /* 문제를 random하게 선택 */
 function selectQuestion() {
@@ -281,6 +282,7 @@ function resetCheckBtn() {
 
 /* 결과창에 대한 설정 */
 function controllResult() {
+    document.getElementById("quiz-user").innerHTML = localStorage.getItem("username");
     document.getElementById("quiz-wrong-answer").innerHTML = wrongAnswer;
     document.getElementById("quiz-correct-answer").innerHTML = userScore;
     document.getElementById("result-container").style.display = "flex";
@@ -305,3 +307,13 @@ function progressMove() {
         questionCnt.innerHTML = questionNum + " / 10";
     }
 }
+
+function setCookie(cookieName, value, exdays) {
+    let exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+
+    let cookieValue = escape(value) + ((exdays == null) ? "" : ";expires=" + exdate.toGTMString());
+    document.cookie = cookieName + "=" + cookieValue;
+}
+
+
