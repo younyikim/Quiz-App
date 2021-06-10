@@ -47,6 +47,8 @@ h1, h2, h3, h4 {
     line-height : 0.8;
     margin-left : 5rem;
 }
+
+
 .showcase-pic {
     position : relative;
     height: 60vh;
@@ -56,7 +58,7 @@ h1, h2, h3, h4 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: url('../img/main_2.jpg')  no-repeat center center/cover;
+    background: url('../img/main_3.jpg')  no-repeat center center/cover;
 }
   
 
@@ -79,7 +81,8 @@ h1, h2, h3, h4 {
     align-items: center;
     justify-content: center;
     font-size: 4rem;
-    font-weight: 500;
+    font-weight: 700;
+    color: #fff;
     z-index: 3;
 }
 
@@ -87,18 +90,34 @@ h1, h2, h3, h4 {
     margin-bottom: 2rem;
 }
 
-#showcase-login-form input {
+#showcase-login-form > input {
     width: 50%;
-    height: 4vh;
+    height: 5vh;
     border: none;
-    background-color: rgba(255, 255, 255, 0.76);
     border-radius: 2px;
     text-align: center;
+    font-size: 2.8rem;
+    background: transparent;
+    color:#fff;
+    border: none;
+    border-bottom: 3px solid #fff;
+    
 }
 
-#showcase-login-form input::placeholder {
-    color: rgb(207, 207, 207);
+#showcase-login-form > ::placeholder {
+    font-size: 2rem;
+    color: rgba(231, 231, 231, 0.842);
 }
+
+#showcase-login-form > input:focus {
+    outline: none;
+}
+#showcase-login-form > input:focus::-webkit-input-placeholder,
+ textarea:focus::-webkit-input-placeholder 
+ { /* WebKit browsers */
+     color:transparent; 
+}
+
 
 #showcase-login-button {
     position: absolute;
@@ -109,6 +128,7 @@ h1, h2, h3, h4 {
     z-index: 3;
     text-decoration: none; 
     margin-top: 10rem;
+    font-size: 2.5rem;
 }
 
 #showcase-login-again {
@@ -121,15 +141,22 @@ h1, h2, h3, h4 {
 }
 
 #quiz-user-greeting {
-    font-size: 4rem;
-    font-weight: 500;
-    margin-bottom: 3rem;
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 6rem;
+    color: #fff; 
 }
 
 #showcase-start-button {
     display: none;
     z-index: 3;
     text-decoration: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    margin-top: 10rem;
 }
 
 /* Quiz Main */
@@ -211,7 +238,7 @@ h1, h2, h3, h4 {
     top: 0;
     left: 0;
     margin-left: 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .quiz-aside-home a:visited {
@@ -225,7 +252,7 @@ h1, h2, h3, h4 {
 .quiz-aside-container>:nth-child(2){
     align-self: center;
     margin-top: 29vh;
-    font-size: 3.8rem;
+    font-size: 4rem;
     font-weight: 650;
     color: #fff;
     text-transform: uppercase;
@@ -310,7 +337,8 @@ label .alphabet {
 }
 
 .answer {
-    margin-left: 1rem;
+    margin-left: 1.5rem;
+    margin-top: 1.2rem;
 }
 
 input[type="radio"] {
@@ -372,7 +400,7 @@ input[type="radio"]:checked ~ .option {
     flex-wrap: center;
     align-items: center;
     justify-content: center;
-    background-color: rgb(216, 216, 216);
+    /* background-color: rgb(216, 216, 216); */
     grid-column: 1 / 4;
     grid-row : 3 / 4;
     height: 10vh;
@@ -414,29 +442,23 @@ input[type="radio"]:checked ~ .option {
 
 /* Buttons */
 .btn {
-    display: inline-block;
-    background: #000;
+    font-size: 3rem;
+    font-weight: 800;
     color: #fff;
-    padding : 0.2rem 1.0rem;
-    font-size: 1rem;
-    text-align: center;
-    border: none;
-    cursor : pointer;
-    margin-right : 0.5rem;
-    outline: none;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.45);
-    border-radius: 2px;
 }
 
+.btn-link:hover {
+    color: rgb(221, 221, 221);
+}
 .btn-xl {
     font-size: 3rem;
+    font-weight: 500;
     padding: 1.5rem 2.1rem;
-    text-transform: uppercase;
 }
 .btn-rounded {
     border-radius: 6px;
 }
-.btn:hover {
+.btn:hover {    
     opacity: 0.9;
 }
 
@@ -456,7 +478,7 @@ input[type="radio"]:checked ~ .option {
     }
 
    .showcase-pic {
-        height: 50vh;
+        height: 48vh;
     }
 
     #showcase-login-form {
@@ -491,3 +513,91 @@ input[type="radio"]:checked ~ .option {
         color: #fff;
     }
 }
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .btn-xl {
+        font-size: 2.5rem;
+    }
+ 
+    #title-left, 
+    #title-right {
+        font-size: 3.5rem;
+    }
+ 
+    .showcase {
+        height : 80vh;
+     }
+     
+    .showcase-pic {
+        height: 54vh;
+    }
+    #showcase-login-form {
+        font-size: 2.5rem;
+    }
+ 
+    #quiz-user-greeting {
+        font-size: 3rem;
+    }
+ 
+    .quiz-aside-container {
+        grid-column: 1 / 4;
+        grid-row: 1 / 2;
+        height: 20vh;
+    }
+ 
+    .quiz-container{
+        grid-column: 1 / 4;
+        grid-row: 1 / 2;
+    }
+ 
+    .quiz-progress{
+        grid-column: 1 / 4;
+        grid-row : 3 / 4;
+    }
+ 
+    .quiz-aside-container>:nth-child(2){
+        margin-top: 2vh;
+    }
+     
+    .quiz-aside-home a:visited {
+        color: #fff;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .btn-xl {
+        font-size: 2.5rem;
+    }
+ 
+     #title-left, 
+     #title-right {
+        font-size: 3.5rem;
+    }
+ 
+    .showcase {
+        height : 80vh;
+    }
+ 
+    .showcase-pic {
+        height: 54vh;
+    }
+ 
+     #showcase-login-form {
+        font-size: 2.5rem;
+    }
+ 
+     #quiz-user-greeting {
+        font-size: 4rem;
+    }
+ }
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {  }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {  }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { }

@@ -115,14 +115,14 @@ function showQuestion(idx) {
 
     const currentQuestion = shuffleQuestion[idx];
 
-    if (questionNum == 1) {
+    if (questionNum == 1 || $(".quiz-alert-container").css("display") === "flex") {
         $(".quiz-container").hide();
     }
     $(".quiz-container")
         .fadeOut(function () {
             progressMove();
             if (questionNum <= 9) {
-                $("#quiz-display-num").text("Question 0" + questionNum);
+                $("#quiz-display-num").html("Question 0" + questionNum);
             } else {
                 $("#quiz-display-num").html("Question " + questionNum);
             }
@@ -134,7 +134,7 @@ function showQuestion(idx) {
             $("#option-4-answer").html(currentQuestion.choices[3]);
 
             $(".quiz-container").fadeIn('fast');
-        })
+        });
 }
 
 /* 이전 문제와 선택했던 답안을 보여준다. */
@@ -298,22 +298,13 @@ function closeChooseOptionAlarm() {
 /* 진행 상황을 보여주는 progress bar */
 function progressMove() {
     if (questionNum <= 10) {
-        let elem = document.getElementById("quiz-progress-bar");
         let questionCnt = document.getElementById("questionCnt");
         let width = questionNum;
 
         width *= 10;
-        elem.style.width = width + "%";
+        $("#progress-bar")
+            .css("width", width + "%")
+            .attr("aria-valuenow", width);
         questionCnt.innerHTML = questionNum + " / 10";
     }
 }
-
-function setCookie(cookieName, value, exdays) {
-    let exdate = new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-
-    let cookieValue = escape(value) + ((exdays == null) ? "" : ";expires=" + exdate.toGTMString());
-    document.cookie = cookieName + "=" + cookieValue;
-}
-
-
