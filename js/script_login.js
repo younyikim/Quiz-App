@@ -13,7 +13,6 @@ const HIDDEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "username"; // 현재 퀴즈에 로그인한 사용자를 저장한다.
 const ALLUSERSNAME_KEY = "allusersname"; // 퀴즈에 로그인한 모든 사용자를 저장한다.
 
-let isCopied = false;
 let allUserName = [];
 
 logoutBtn.addEventListener("click", onLogoutSubmit);

@@ -115,6 +115,8 @@ function showQuestion(idx) {
 
     const currentQuestion = shuffleQuestion[idx];
 
+    /* 첫번째 문제를 로드시, 빈화면이 보이는 것이 방지하고,
+        유효성 검사 창이 표시될때, 문제와 보기들이 두번 fade 되지 않도록 방지 */
     if (questionNum == 1 || $(".quiz-alert-container").css("display") === "flex") {
         $(".quiz-container").hide();
     }
