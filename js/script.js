@@ -279,16 +279,6 @@ function resetCheckBtn() {
     }
 }
 
-
-/* 결과창에 대한 설정 */
-function controllResult() {
-    document.getElementById("quiz-user").innerHTML = localStorage.getItem("username");
-    document.getElementById("quiz-wrong-answer").innerHTML = wrongAnswer;
-    document.getElementById("quiz-correct-answer").innerHTML = userScore;
-    document.getElementById("result-container").style.display = "flex";
-}
-
-
 /* 옵션 미선택 시, 보여지는 창을 없앤다. */
 function closeChooseOptionAlarm() {
     document.querySelector(".quiz-alert-container").style.display = "none";
@@ -306,5 +296,31 @@ function progressMove() {
             .css("width", width + "%")
             .attr("aria-valuenow", width);
         questionCnt.innerHTML = questionNum + " / 10";
+    }
+}
+
+/* 결과창에 대한 설정 */
+function controllResult() {
+    document.getElementById("quiz-user").innerHTML = localStorage.getItem("username");
+    document.getElementById("quiz-wrong-answer").innerHTML = wrongAnswer;
+    document.getElementById("quiz-correct-answer").innerHTML = userScore;
+    document.getElementById("result-container").style.display = "flex";
+}
+
+let allUser = [];
+const USERNAME_KEY = "username";
+
+/* 사용자의 순위를 보여주는 함수*/
+function controllRanking() {
+    let user = allUser[allUser.length - 1];
+    let score = userScore;
+    // allUser.push({ "name": user, "score": score });
+
+    // let result = allUser.sort(function (a, b) {
+    //     return b.score - a.score;
+    // });
+
+    for (let i = 0; i < allUser.length; i++) {
+        // 출력
     }
 }

@@ -159,6 +159,19 @@ h1, h2, h3, h4 {
     margin-top: 10rem;
 }
 
+#showcase-logout-button {
+    display: none;
+    z-index: 3;
+    text-decoration: none;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    margin-top: 10rem;
+    font-size: 1.3rem;
+}
+
 /* Quiz Main */
 .quiz{
     width: 100%;
@@ -400,22 +413,9 @@ input[type="radio"]:checked ~ .option {
     flex-wrap: center;
     align-items: center;
     justify-content: center;
-    /* background-color: rgb(216, 216, 216); */
     grid-column: 1 / 4;
     grid-row : 3 / 4;
     height: 10vh;
-}
-
-#quiz-progress-container {
-    width:70%;
-    height : 30%;
-    background-color: rgb(226, 227, 238);
-}
-
-#quiz-progress-bar {
-    width: 7%;
-    height : 100%;
-    background-color: rgb(174, 180, 243);
 }
 
 #questionCnt{
@@ -450,11 +450,7 @@ input[type="radio"]:checked ~ .option {
 .btn-link:hover {
     color: rgb(221, 221, 221);
 }
-.btn-xl {
-    font-size: 3rem;
-    font-weight: 500;
-    padding: 1.5rem 2.1rem;
-}
+
 .btn-rounded {
     border-radius: 6px;
 }
