@@ -252,7 +252,7 @@ function checkAnswer() {
 }
 
 /* 다음 버튼의 동작을 설정한다. */
-function controllNextBtn() {
+function controllNextBtn(event) {
     checkAnswer();
     resetCheckBtn();
 
@@ -264,7 +264,7 @@ function controllNextBtn() {
 }
 
 /* 이전 버튼의 동작을 설정한다. */
-function controllPrevBtn() {
+function controllPrevBtn(event) {
     if (questionIndex >= 1 && event.target.id === "btn-previous") {
         --questionNum;
         showPrevQuestion(--questionIndex);
@@ -304,25 +304,58 @@ function progressMove() {
 /* 결과창에 대한 설정 */
 function controllResult() {
     document.getElementById("quiz-user").innerHTML = localStorage.getItem("username");
-    document.getElementById("quiz-wrong-answer").innerHTML = wrongAnswer;
-    document.getElementById("quiz-correct-answer").innerHTML = userScore;
     document.getElementById("result-container").style.display = "flex";
+    document.getElementById("quiz-result-chart-score").innerHTML = userScore + " / 10";
+    document.querySelector(".quiz-result-chart").setAttribute("data-percent", userScore * 10);
+
+    // 원형 차트 그리기
+    var element = document.querySelector('.quiz-result-chart');
+    new EasyPieChart(element, {
+        barColor: '#3CAEA3',  //차트가 그려질 색
+        trackColor: '#ccc',  // 차트가 그려지는 트랙의 기본 배경색(chart1 의 회색부분)
+        scaleColor: '#fff', // 차트 테두리에 그려지는 기준선 (chart2	의 테두리 선)
+        lineCap: 'butt', // 차트 선의 모양 chart1 butt / chart2 round / chart3 square
+        lineWidth: 30, // 차트 선의 두께
+        size: 300, // 차트크기
+        animate: 1000, // 그려지는 시간 
+        onStart: $.noop,
+        onStop: $.noop
+    });
+
+    controllRanking();
 }
 
-let allUser = [];
 const USERNAME_KEY = "username";
+const TOTALUSER_KEY = "totaluser";
+let allUsersScore = JSON.parse(localStorage.getItem(TOTALUSER_KEY)) || [];
 
 /* 사용자의 순위를 보여주는 함수*/
 function controllRanking() {
-    let user = allUser[allUser.length - 1];
-    let score = userScore;
-    // allUser.push({ "name": user, "score": score });
+    let currentUser = localStorage.getItem(USERNAME_KEY);
+    let currentUserScore = userScore;
 
-    // let result = allUser.sort(function (a, b) {
-    //     return b.score - a.score;
-    // });
+    let value = {
+        name: currentUser,
+        score: currentUserScore
+    };
+    allUsersScore.push(value);
+    console.log(allUsersScore);
+    localStorage.setItem(TOTALUSER_KEY, JSON.stringify(allUsersScore));
 
-    for (let i = 0; i < allUser.length; i++) {
-        // 출력
+    let values = "\n";
+
+    //점수를 기준으로 내림차순 정렬
+    allUsersScore.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
+    console.log(allUsersScore);
+    for (let i = 1; i <= allUsersScore.length; i++) {
+
+        // 1~3등의 등수 표시
+        if (i > 3) { break; }
+        document.getElementById("quiz-rank-" + i + "-name").innerHTML = allUsersScore[i - 1].name;
+        document.getElementById("quiz-rank-" + i + "-score").innerHTML = allUsersScore[i - 1].score;
     }
+
 }

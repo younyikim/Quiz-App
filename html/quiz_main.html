@@ -24,17 +24,47 @@
         <!-- 퀴즈 결과창 -->
         <div class="quiz-result-container" id="result-container">
             <div class="quiz-result-content">
+                <div class="quiz-result-chart" data-percent="73" data-scale-color="#ffb400">
+                    <span class="quiz-result-chart-info">
+                        <p id="quiz-result-chart-score"></p>
+                    </span>
+                </div>
                 <h1>Quiz complete</h1>
                 <div class="quiz-result-display">
-                    <p>User : <span id="quiz-user"></span></p>
-                    <p>Wrong answer : <span id="quiz-wrong-answer"></span></p>
-                    <p>Score : <span id="quiz-correct-answer"></span></p>
+                    <p id="quiz-result-user">User : <span id="quiz-user"></span></p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td id="quiz-rank-1-name"></td>
+                                <td id="quiz-rank-1-score"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td id="quiz-rank-2-name"></td>
+                                <td id="quiz-rank-2-score"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td id="quiz-rank-3-name"></td>
+                                <td id="quiz-rank-3-score"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="quiz-retry">
+                    <a href="../html/index.html" id="quiz-retry-button" class="btn btn-primary btn-lg active"
+                        role="button" aria-pressed="true">Retry</a>
                 </div>
             </div>
-            <div class="quiz-retry">
-                <a href="../html/index.html" id="quiz-retry-button" class="btn btn-rounded"><i class="fas fa-redo"></i>
-                    Retry </a>
-            </div>
+
         </div>
         <!-- 퀴즈 화면 왼쪽 (홈버튼 & 카테고리) -->
         <div class="quiz-aside-container">
@@ -118,9 +148,9 @@
 
 
         </div>
-
     </section>
     <script src="../js/script.js"></script>
+    <script src="../js/easypiechart.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
