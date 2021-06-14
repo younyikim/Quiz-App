@@ -265,7 +265,7 @@ function controllNextBtn(event) {
 
 /* 이전 버튼의 동작을 설정한다. */
 function controllPrevBtn(event) {
-    if (questionIndex >= 9 && event.target.id === "btn-previous") {
+    if (questionIndex >= 1 && event.target.id === "btn-previous") {
         --questionNum;
         showPrevQuestion(--questionIndex);
     }
