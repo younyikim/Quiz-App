@@ -30,7 +30,7 @@
   따라서 `동일 브라우저 내`에서 퀴즈를 푼 참가자에 한하여 순위가 표시된다. 
 ----------------------------------------------------------------------      
 ### 프로그램 실행 화면  
-[Quiz Application Test On Live](https://younyikim.github.io/Quiz-App/)
+[Quiz Application Test On Live](https://younyikim.github.io/Quiz-App/html/index.html)
 
 퀴즈 로그인 화면            |  로그인 이후 화면
 :-------------------------:|:-------------------------:
