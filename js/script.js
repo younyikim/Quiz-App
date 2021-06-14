@@ -256,7 +256,7 @@ function controllNextBtn(event) {
     checkAnswer();
     resetCheckBtn();
 
-    if (questionIndex <= 1 && event.target.id === "btn-next") {
+    if (questionIndex <= 9 && event.target.id === "btn-next") {
         showQuestion(questionIndex);
     } else {
         controllResult();
