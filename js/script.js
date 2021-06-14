@@ -256,7 +256,7 @@ function controllNextBtn(event) {
     checkAnswer();
     resetCheckBtn();
 
-    if (questionIndex <= 9 && event.target.id === "btn-next") {
+    if (questionIndex <= 1 && event.target.id === "btn-next") {
         showQuestion(questionIndex);
     } else {
         controllResult();
@@ -265,7 +265,7 @@ function controllNextBtn(event) {
 
 /* 이전 버튼의 동작을 설정한다. */
 function controllPrevBtn(event) {
-    if (questionIndex >= 1 && event.target.id === "btn-previous") {
+    if (questionIndex >= 9 && event.target.id === "btn-previous") {
         --questionNum;
         showPrevQuestion(--questionIndex);
     }
@@ -352,8 +352,10 @@ function controllRanking() {
 
         // 1~3등의 등수 표시
         if (i > 3) { break; }
+
         document.getElementById("quiz-rank-" + i + "-name").innerHTML = allUsersScore[i - 1].name;
         document.getElementById("quiz-rank-" + i + "-score").innerHTML = allUsersScore[i - 1].score;
+
     }
 
 }
