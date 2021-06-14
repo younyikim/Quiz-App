@@ -20,11 +20,11 @@ logoutBtn.addEventListener("click", onLogoutSubmit);
 function onLoginSubmit(event) {
     event.preventDefault();
     const username = loginInput.value;
-    console.log(username);
+
     let $result = $("#showcase-login-form");
 
     allUserName.push(username);
-    console.log(allUserName);
+    // console.log(allUserName);
     localStorage.setItem(ALLUSERSNAME_KEY, allUserName);
     localStorage.setItem(USERNAME_KEY, username);
 
@@ -66,7 +66,6 @@ let saveUserName = localStorage.getItem(USERNAME_KEY);
 (function onLoginFormControl(saveUserName) {
     if (saveUserName === null) {
         //처음 방문한 경우, 이름 입력 창을 보여준다.
-        console.log("1.처음 방문시 / 로그아웃후 다시 로그인");
         let $loginForm = $("#showcase-login-form");
         $loginForm.hide();
         $loginForm.fadeIn("slow").css("display", "flex");
@@ -76,16 +75,3 @@ let saveUserName = localStorage.getItem(USERNAME_KEY);
         paintGreeting(saveUserName);
     }
 })(saveUserName);
-
-// if (saveUserName === null) {
-//     //처음 방문한 경우, 이름 입력 창을 보여준다.
-//     console.log("1.처음 방문시 / 로그아웃후 다시 로그인");
-//     let $loginForm = $("#showcase-login-form");
-//     $loginForm.hide();
-//     $loginForm.fadeIn("slow").css("display", "flex");
-//     $loginForm.submit(onLoginSubmit);
-// } else {
-//     //이미 방문한 적이 있는 경우, 환영 메세지를 출력한다.
-//     paintGreeting(saveUserName);
-// }
-

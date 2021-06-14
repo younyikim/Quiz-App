@@ -179,13 +179,13 @@ function checkAnswer() {
                     questionNum++;
                     questionIndex++;
                     /* Test Console */
-                    console.log("Correct! score : " + userScore + ", num : " + questionNum);
+                    // console.log("Correct! score : " + userScore + ", num : " + questionNum);
                 } else {
                     wrongAnswer++;
                     questionNum++;
                     questionIndex++;
                     /* Test Console */
-                    console.log("Wrong! score : " + userScore + ", num : " + questionNum);
+                    // console.log("Wrong! score : " + userScore + ", num : " + questionNum);
                 }
 
                 collectAnswer.push({
@@ -195,8 +195,8 @@ function checkAnswer() {
                 });
 
                 /* Test Console */
-                console.log(collectAnswer[questionIndex - 1]);
-                console.log("questionIndex : " + questionIndex + ", questionNum : " + questionNum);
+                // console.log(collectAnswer[questionIndex - 1]);
+                // console.log("questionIndex : " + questionIndex + ", questionNum : " + questionNum);
 
             }
             /* 이전 문제로 돌아가 다시 문제를 푼 경우, 답을 확인한다.*/
@@ -231,8 +231,8 @@ function checkAnswer() {
                 }
 
                 /* Test Console */
-                console.log(collectAnswer[questionIndex]);
-                console.log("origin Ans :" + prevOriginAns + ", questionIndex : " + questionIndex + ", questionNum : " + questionNum);
+                // console.log(collectAnswer[questionIndex]);
+                // console.log("origin Ans :" + prevOriginAns + ", questionIndex : " + questionIndex + ", questionNum : " + questionNum);
 
                 questionNum++;
                 questionIndex++;
@@ -339,7 +339,6 @@ function controllRanking() {
         score: currentUserScore
     };
     allUsersScore.push(value);
-    console.log(allUsersScore);
     localStorage.setItem(TOTALUSER_KEY, JSON.stringify(allUsersScore));
 
     let values = "\n";
@@ -349,7 +348,6 @@ function controllRanking() {
         return b.score - a.score;
     });
 
-    console.log(allUsersScore);
     for (let i = 1; i <= allUsersScore.length; i++) {
 
         // 1~3등의 등수 표시
