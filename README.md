@@ -3,9 +3,11 @@
 #### HTML, CSS, JavaScript를 이용한 퀴즈 웹 어플리케이션 프로젝트입니다.   
 
 ----------------------------------------------------------------------
-<img src="https://img.shields.io/badge/HTML-E34F26?style=flat-square&logo=html5&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/></a>
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/></a>
+<p align="left">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+ <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+</p>
 
 ##### Version 1
 * Radio 버튼을 사용하여 퀴즈의 정답을 선택할 수 있다.
